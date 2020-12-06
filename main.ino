@@ -8,16 +8,21 @@ Servo mServo;
 
 
 int ledPin = 7;
+
+//Gelen response için
+//1. Index led 2. index servor için
+//0 ve 3 index ilere kullanılacak
 String resArr[4] = {"000","000","000","000"};
 
 
 
 dht DHT;
-
-String readString = "sdfghjklşdfghjklşi";
+//String'in alloc için dummy daha ile doldurdum
+String readString = "foobarfoobarfoobar";
 boolean TO = false;
 
 void setup() {
+  
   Serial.begin(115200);
   ESP.begin(115200);
   pinMode(7,OUTPUT);
@@ -26,7 +31,9 @@ void setup() {
 }
 
 void loop() {
-  //DHT11 Verileri Oku
+  
+  
+  //Sensör Verilerini Oku
   int chk = DHT.read11(11);
   DHT.read11(11);
     
@@ -52,7 +59,7 @@ void loop() {
   //Cevap Bekle
   while(!TO){
      while (ESP.available() > 0 ) {
-       delay(10);  //delay to allow byte to arrive in input buffer
+       delay(10);  
        char c =   (char) ESP.read();
        readString += c;
        
@@ -61,7 +68,7 @@ void loop() {
     if (readString.length() > 0) {
       Serial.println(readString + "res");
     
-        //Hata varsa koduna göre mesajı printle
+        //Hata varsa http status coduna göre mesajı printle
       if(readString.charAt(0) == 'H'){
         
         readString.remove(0,6);
@@ -86,6 +93,7 @@ void loop() {
 
 
        //LED Kontrol
+       //Gelen verinin 1. indexindeki degere göre on/oof
        if(resArr[1].charAt(0) == '1'){
         digitalWrite(ledPin,1);
        }else if (resArr[1].charAt(0) == '0'){
@@ -94,6 +102,7 @@ void loop() {
     
 
       //Servo Kontrol
+      //Gelen verinin 2. indexindeki degere göre on/oof
       mServo.write( resArr[2].toInt());
       
      
