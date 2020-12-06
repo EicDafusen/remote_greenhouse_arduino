@@ -14,12 +14,12 @@
 ### Gönderilen Verinin Çeşitlendirilmesi
 
     Mevcut uygulamada tek bir istek yolluyor ve sadece sensör verilerini yolluyor. Serverın durumunu, hataları ve herhangi bir acil durumu yollamamızı sağlayacak birden fazla iste,
-    ğin yollanmasını 
+    ğin yollanmasını. 
 
 ### Data Validation
 
-    ESP ve Arduinonun veri aktarımı çok güvenilir olamayabiliyor bunun için aktarılan verilerde
-    daha sağlam bir validation sistemi gerekli 
+    ESP ve Arduinonun veri aktarımı çok güvenilir değil üstüne bunun üzeri bir WiFi iletişim var bu yüzden için aktarılan verilerde
+    daha sağlam bir validation sistemi gerekli.
 
 ### Offline Mode
 
